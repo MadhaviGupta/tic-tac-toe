@@ -18,24 +18,32 @@ public class TTT {
             }
         }
         char player = 'X';
+        int step = 1;
         boolean gameOver = false;
         while(!gameOver) {
-            printBoard(board);
-            System.out.print("Player " + player + " enter: ");
-            int row = sc.nextInt();
-            int col = sc.nextInt();
-            if(board[row][col] == ' ') {
-                board[row][col] = player;
-                gameOver = haveWon(board, player);
-                if(gameOver) {
-                    System.out.println("Player " + player + " has won the game!");
-                    break;
+            if(step < 10) {
+                printBoard(board);
+                System.out.print("Player " + player + " enter: ");
+                int row = sc.nextInt();
+                int col = sc.nextInt();
+                if (board[row][col] == ' ') {
+                    board[row][col] = player;
+                    gameOver = haveWon(board, player);
+                    if (gameOver) {
+                        System.out.println("Player " + player + " has won the game!");
+                        break;
+                    } else {
+                        player = player == 'X' ? 'O' : 'X';
+                    }
                 } else {
-                    player = player == 'X' ? 'O' : 'X';
+                    System.out.println("Invalid Move!");
                 }
-            } else {
-                System.out.println("Invalid Move!");
             }
+            else {
+                System.out.println("It's a draw!");
+                break;
+            }
+            step++;
         }
         printBoard(board);
     }
